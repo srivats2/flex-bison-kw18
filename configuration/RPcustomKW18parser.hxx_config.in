@@ -1,19 +1,19 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 2.7.  */
 
 /* Bison interface for Yacc-like parsers in C
-
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
-
+   
+      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
+   
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-
+   
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,54 +26,75 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-
+   
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_SRIVATS_CODE_FLEX_BISON_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
-# define YY_YY_HOME_SRIVATS_CODE_FLEX_BISON_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-
-/* Token type.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    COMMENT = 258,
-    MY_INT = 259,
-    MY_FLOAT = 260,
-    MY_STRING = 261
-  };
+#ifndef YY_KW18READER_C_CODE_FLEX_BISON_KW18_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
+# define YY_KW18READER_C_CODE_FLEX_BISON_KW18_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED
+/* Enabling traces.  */
+#ifndef KW18READERDEBUG
+# if defined YYDEBUG
+#  if YYDEBUG
+#   define KW18READERDEBUG 1
+#  else
+#   define KW18READERDEBUG 0
+#  endif
+# else /* ! defined YYDEBUG */
+#  define KW18READERDEBUG 0
+# endif /* ! defined YYDEBUG */
+#endif  /* ! defined KW18READERDEBUG */
+#if KW18READERDEBUG
+extern int KW18readerdebug;
 #endif
 
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+/* Tokens.  */
+#ifndef KW18READERTOKENTYPE
+# define KW18READERTOKENTYPE
+   /* Put the tokens into the symbol table, so that GDB and other debuggers
+      know about them.  */
+   enum KW18readertokentype {
+     COMMENT = 258,
+     MY_INT = 259,
+     MY_FLOAT = 260,
+     MY_STRING = 261
+   };
+#endif
 
-union YYSTYPE
+
+#if ! defined KW18READERSTYPE && ! defined KW18READERSTYPE_IS_DECLARED
+typedef union KW18READERSTYPE
 {
-#line 29 "RPcustomKW18parser.y" /* yacc.c:1909  */
+/* Line 2058 of yacc.c  */
+#line 30 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.y"
 
         int ival;
         float fval;
         char *sval;
 
-#line 67 "/home/srivats/code/flex_bison/build/src/RPcustomKW18parser.hxx" /* yacc.c:1909  */
-};
 
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
+/* Line 2058 of yacc.c  */
+#line 78 "C:/code/flex-bison-kw18/build/src/RPcustomKW18parser.hxx"
+} KW18READERSTYPE;
+# define KW18READERSTYPE_IS_TRIVIAL 1
+# define KW18readerstype KW18READERSTYPE /* obsolescent; will be withdrawn */
+# define KW18READERSTYPE_IS_DECLARED 1
 #endif
 
+extern KW18READERSTYPE KW18readerlval;
 
-extern YYSTYPE yylval;
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int KW18readerparse (void *YYPARSE_PARAM);
+#else
+int KW18readerparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
+int KW18readerparse (void);
+#else
+int KW18readerparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
-int yyparse (void);
-
-#endif /* !YY_YY_HOME_SRIVATS_CODE_FLEX_BISON_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED  */
+#endif /* !YY_KW18READER_C_CODE_FLEX_BISON_KW18_BUILD_SRC_RPCUSTOMKW18PARSER_HXX_INCLUDED  */
