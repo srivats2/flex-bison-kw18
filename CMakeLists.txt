@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 2.8)
-project(flex-bison-test)
+project(KW18-Parser)
 add_subdirectory(src)
 

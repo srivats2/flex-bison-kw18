@@ -1,3 +1,4 @@
+%define api.prefix {KW18reader}
 %{
 #include<cstdio>
 #include<iostream>

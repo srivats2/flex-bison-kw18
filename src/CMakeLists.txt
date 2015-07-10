@@ -54,8 +54,10 @@ FIND_PACKAGE(FLEX)
 
 if(UNIX)
 configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomKW18lexer.l_unix ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.l)
+configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomKW18parser.y_unix ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18parser.y)
 else(WIN32)
 configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomKW18lexer.l_win32 ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.l)
+configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomKW18parser.y_win32 ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18parser.y)
 endif()
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -63,10 +65,10 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 #if you do not have flex and bison installed then the slower nonunistd version will be used to parse files
 #I have assumed that if you do not have Bison and Flex then you are on a non *nix system and hence this parser will be slower..only way to ensure full compatibility of types
 if(BISON_FOUND AND FLEX_FOUND)
-BISON_TARGET(KW18Parser RPcustomKW18parser.y ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18parser.cxx)
+BISON_TARGET(KW18Parser ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18parser.y ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18parser.cxx)
 FLEX_TARGET(KW18Scanner ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.l ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.cxx)
 ADD_FLEX_BISON_DEPENDENCY(KW18Scanner KW18Parser)
-SET(MU_SOURCE ${MU_SOURCE} ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.l RPcustomKW18parser.y)
+SET(MU_SOURCE ${MU_SOURCE} ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.l ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18parser.y)
 else()
 MESSAGE("FLEX and BISON paths must be set to compile the system optimized parser..else the slower pre-compiled headers will be used")
 configure_file(${PROJECT_SOURCE_DIR}/configuration/RPcustomKW18lexer.cxx_config.in ${CMAKE_CURRENT_BINARY_DIR}/RPcustomKW18lexer.cxx)

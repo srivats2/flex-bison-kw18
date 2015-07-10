@@ -6,7 +6,7 @@
 extern "C" int kw18_parse(char *);
 
 
-int main(int arch, char *argv[]){
+int main(int argc, char *argv[]){
     std::clock_t start;
     start = std::clock();
 

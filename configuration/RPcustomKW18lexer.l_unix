@@ -4,15 +4,15 @@
 #include "RPcustomKW18parser.hxx"
 using namespace std;
 int lineno=0;
-#define YY_DECL extern "C" int yylex()
+#define YY_DECL extern "C" int KW18readerlex()
 %}
 %%
-\#.*             {yylval.sval=strdup(yytext);return COMMENT; }
+\#.*             {KW18readerlval.sval=strdup(yytext);return COMMENT; }
 \n              {++lineno;}
--[0-9]+|-[0-9]+\.[0-9]+|[0-9]+\.[0-9]+|[0-9]+|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+) { yylval.ival = atoi(yytext);return MY_INT; }
+-[0-9]+|-[0-9]+\.[0-9]+|[0-9]+\.[0-9]+|[0-9]+|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+) { KW18readerlval.ival = atoi(yytext);return MY_INT; }
 [a-zA-Z0-9]+|#+   {
-    // we have to copy because we can't rely on yytext not changing underneath us:
-    yylval.sval = strdup(yytext);
+    // we have to copy because we can't rely on yytext not changing:
+    KW18readerlval.sval = strdup(yytext);
     return MY_STRING;
 }
 .              ;

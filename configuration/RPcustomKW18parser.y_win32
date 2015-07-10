@@ -1,0 +1,95 @@
+%define api.prefix "KW18reader"
+%{
+#include<cstdio>
+#include<iostream>
+#include<vector>
+using namespace std;
+// stuff from flex that bison needs to know about:
+extern "C" int yylex();
+extern "C" int yyparse();
+extern int lineno;
+extern FILE *yyin;
+std::vector<int> my_kw18_data_x;
+std::vector<int> my_kw18_data_y;
+std::vector<int> my_kw18_data_frno;
+std::vector<int> my_kw18_data_oid;
+
+void yyerror(const char *s);
+extern "C" int kw18_parse(char*);
+%}
+
+
+
+
+
+// Bison fundamentally works by asking flex to get the next token, which it
+// returns as an object of type "yystype".  But tokens could be of any
+// arbitrary data type!  So we deal with that in Bison by defining a C union
+// holding each of the types of tokens that Flex could return, and have Bison
+// use that union instead of "int" for the definition of "yystype":
+%union {
+        int ival;
+        float fval;
+        char *sval;
+}
+
+// define the constant-string tokens:
+//cout << "Line #:"<<lineno<<"\t\t" << $1 <<"\t" << $2 <<"\t" <<  $3 <<"\t" << $4 <<"\t" << $5 <<"\t" << $6 <<"\t" << $7 <<"\t" << $8 <<"\t" << $9 <<"\t" << $10 <<"\t" << $11 <<"\t" << $12 <<"\t" <<  $13 <<"\t" << $14 <<"\t" << $15 <<"\t" << $16 <<"\t" << $17 <<"\t" << $18 <<"\t" << $19 <<"\t" << $20<< endl;
+%token <sval> COMMENT
+
+
+// define the "terminal symbol" token types I'm going to use (in CAPS
+// by convention), and associate each with a field of the union:
+%token <ival> MY_INT
+%token <fval> MY_FLOAT
+%token <sval> MY_STRING
+%%
+
+// the first rule defined is the highest-level rule, which in our
+// case is just the concept of a whole "kw18 file":
+kw18:
+        header body_section | header | body_section { cout << "done with a kw18 file (# of lines : "<<lineno<<" )" << endl; }
+        ;
+header:
+        COMMENT { }//cout << "Reading a KW18 commented line : " << $1 << endl; }
+        ;
+        body_section:
+                body_lines
+                ;
+        body_lines:
+                body_lines body_line
+                | body_line
+                ;
+        body_line:
+            MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT MY_INT   {  my_kw18_data_x.push_back($8);my_kw18_data_y.push_back($9); my_kw18_data_frno.push_back($3); my_kw18_data_oid.push_back($1); }
+            ;
+
+%%
+
+int kw18_parse(char* filename) {
+            //int main(int argc, char* argv[]){
+                    // open a file handle to a particular file:
+                    FILE *myfile = fopen(filename, "r");
+                    // make sure it's valid:
+                    if (!myfile) {
+                            cout << "I can't open KW18 file!" << endl;
+                            return -1;
+                    }
+                    // set flex to read from it instead of defaulting to STDIN:
+                    yyin = myfile;
+
+                    // parse through the input until there is no more:
+                    do {
+                            yyparse();
+                    } while (!feof(yyin));
+                    cout << "done with a kw18 file (# of lines : "<<lineno<<" )" << endl;
+
+}
+
+void yyerror(const char *s) {
+        cout << "KW18 parse error! " << s << endl;
+        exit(-1);
+}
+
+
+
