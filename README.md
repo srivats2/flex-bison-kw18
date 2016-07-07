@@ -1,4 +1,6 @@
 # flex-bison-kw18
+
+[![Join the chat at https://gitter.im/srivats2/flex-bison-kw18](https://badges.gitter.im/srivats2/flex-bison-kw18.svg)](https://gitter.im/srivats2/flex-bison-kw18?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A flex and bison parser that can read in a KW18 file
 
 The configuration files have been provided such that even if you do not have FLEX and BISON on your system the compile will simply use the precompiled headers. 
